@@ -15,3 +15,9 @@ laravel/.env.php
 laravel/.env
 laravel/Homestead.yaml
 laravel/Homestead.json
+/laravel/yarn.lock
+/laravel/composer.lock
+/laravel/public/css/
+/laravel/public/css
+/laravel/public/fonts
+/laravel/public/js
