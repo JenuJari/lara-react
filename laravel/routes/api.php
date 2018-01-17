@@ -13,6 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
+// default name space for all routes is 'App\Http\Controllers\Api'
+
+
+Route::post('auth/register', 'Auth\RegisterController@register')->name('auth.register');
+Route::post('auth/login', 'Auth\LoginController@login')->name('auth.login');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

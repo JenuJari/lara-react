@@ -1,0 +1,96 @@
+{
+	"info": {
+		"name": "lara-react",
+		"_postman_id": "29234662-dfa8-4f5f-fdb2-a16cafdebbde",
+		"description": "collections for lara react project ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"description": "",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\" : \"jhon.5456@gmail.com\",\n\t\"password\" : \"Vaishu@36\",\n\t\"name\" : \"Jenish Jariwala\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}api/auth/register",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "Register user"
+					},
+					"response": []
+				},
+				{
+					"name": "User_get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url}}api/user",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"user"
+							]
+						},
+						"description": "get user info\t"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"jhon.5456@gmail.com\",\n\t\"password\" : \"Vaishu@36\",\n\t\"remember\" : \"false\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}api/auth/login",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
