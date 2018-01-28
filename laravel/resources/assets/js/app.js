@@ -15,7 +15,15 @@ require('./bootstrap');
 import React from "react"
 import { render } from "react-dom"
 import Layout from "./layout";
+import { Provider } from 'react-redux'
+import store from './store'
 
-render((<Layout />),
+import { authActions } from './store/actions'
+
+store.dispatch(authActions.authCheck());
+
+render((<Provider store={store}>
+            <Layout />
+        </Provider>),
     document.getElementById('app')
-)
+);

@@ -29,6 +29,7 @@
 		@yield('content')
 	</div>
 
+	<input type="hidden" id="base_url" value="{{ url('/') }}">		
 	<!-- Scripts -->
 	<script src="{{mix('/js/manifest.js')}}"></script>
 	<script src="{{mix('/js/vendor.js')}}"></script>
