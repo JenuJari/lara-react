@@ -1,44 +1,57 @@
 
 import React from "react";
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 class Layout extends React.Component {
 
- render() {
-     return (<div>
-         <nav className="navbar navbar-inverse navbar-fixed-top">
+    static propTypes = {
+        children: PropTypes.node.isRequired
+    }
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            //
+        }
+    }
+
+    render() {
+        return (<div>
+            <nav className="navbar navbar-inverse navbar-fixed-top">
+                <div className="container">
+                    <div className="navbar-header">
+                        <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                            aria-expanded="false" aria-controls="navbar">
+                            <span className="sr-only">Toggle navigation</span>
+                            <span className="icon-bar"></span>
+                            <span className="icon-bar"></span>
+                            <span className="icon-bar"></span>
+                        </button>
+                        <Link className="navbar-brand" to="/">Project name</Link>
+                    </div>
+                    <div id="navbar" className="collapse navbar-collapse">
+                        <ul className="nav navbar-nav">
+                            <li className="active">
+                                <Link to="/">Home</Link>
+                            </li>
+                            <li>
+                                <Link to="/login">Login</Link>
+                            </li>
+                            <li>
+                                <Link to="/register">Register</Link>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
             <div className="container">
-                <div className="navbar-header">
-                <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" 
-                aria-expanded="false" aria-controls="navbar">
-                    <span className="sr-only">Toggle navigation</span>
-                    <span className="icon-bar"></span>
-                    <span className="icon-bar"></span>
-                    <span className="icon-bar"></span>
-                </button>
-                <a className="navbar-brand" href="#">Project name</a>
-                </div>
-                <div id="navbar" className="collapse navbar-collapse">
-                <ul className="nav navbar-nav">
-                    <li className="active"><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                </div>
+                {this.props.children}
             </div>
-            </nav>                                                                                                                                                                
-
-        <div className="container">
-
-            <div className="starter-template">
-                <h1>Bootstrap starter template</h1>
-                <p className="lead">Use this document as a way to quickly start any new project.
-                <br /> All you get is this text and a mostly barebones HTML document.
-                </p>
-            </div>
-
-        </div>
         </div>);
- }
+    }
 
 }
 
