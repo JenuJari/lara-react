@@ -1,7 +1,5 @@
 
-import {
-    AUTH_CHECK
-} from '../action-types';
+import { AUTH_CHECK, AUTH_LOGIN } from "../action-types";
 
 
 export function authCheck() {
@@ -10,3 +8,5 @@ export function authCheck() {
     }
 }
 
+
+export const authLogin = payload => { return { type: AUTH_LOGIN, payload };}

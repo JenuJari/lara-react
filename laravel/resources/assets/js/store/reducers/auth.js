@@ -1,19 +1,19 @@
 import HTTP from '../../utils/Http';
 import {
     AUTH_CHECK,
-    // AUTH_LOGIN,
+    AUTH_LOGIN
     // AUTH_LOGOUT,
     // AUTH_REFRESH_TOKEN,
     // AUTH_RESET_PASSWORD,
 } from '../action-types';
 
-const user = {
-    id: null,
-    name: null,
-    email: null,
-    createdAt: null,
-    updatedAt: null,
-}
+// const user = {
+//     id: null,
+//     name: null,
+//     email: null,
+//     createdAt: null,
+//     updatedAt: null,
+// }
 
 const initialState = {
     isAuthenticated: false,
@@ -24,8 +24,8 @@ const initialState = {
 const reducer = (state = initialState, { type, payload = null }) => {
     switch (type) {
         // case AUTH_REFRESH_TOKEN:
-        // case AUTH_LOGIN:
-        //     return login(state, payload);
+        case AUTH_LOGIN:
+             return login(state, payload);
         case AUTH_CHECK:
             return checkAuth(state);
         // case AUTH_LOGOUT:
@@ -38,6 +38,14 @@ const reducer = (state = initialState, { type, payload = null }) => {
 };
 
 
+const login =  (state, payload) => {
+  localStorage.setItem("access_token", payload);
+  HTTP.defaults.headers.common["Authorization"] = `Bearer ${payload}`;
+
+  state = Object.assign({}, state, { isAuthenticated: true });
+
+  return state;
+}
 
 function checkAuth(state) {
     state = Object.assign({}, state, {
