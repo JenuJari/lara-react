@@ -1,17 +1,31 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class Page extends Component {
 
+    static displayName = "LoginPage";
+
+    static propTypes = {
+        isAuthenticated: PropTypes.bool.isRequired,
+        dispatch: PropTypes.func.isRequired,
+        user : PropTypes.object
+    };
+
     constructor() {
         super();
-
-        this.state = {
-            //
-        };
     }
-
+   
     render() {
-        return (<div>Dashbord page</div>);
+        console.log('render dashbord', typeof this.props.user);
+
+        return (<div>
+            <h1>
+                Dash bord
+            </h1>
+            <pre>
+                { typeof this.props.user != 'undefined' ? this.props.user.toString() : 'N'}
+            </pre>
+        </div>);
     }
 
 }

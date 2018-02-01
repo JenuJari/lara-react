@@ -1,7 +1,10 @@
 import HTTP from '../../utils/Http';
+import store from './../index';
+import * as services from  './../services';
 import {
     AUTH_CHECK,
-    AUTH_LOGIN
+    AUTH_LOGIN,
+    AUTH_SET_USER
     // AUTH_LOGOUT,
     // AUTH_REFRESH_TOKEN,
     // AUTH_RESET_PASSWORD,
@@ -28,6 +31,7 @@ const reducer = (state = initialState, { type, payload = null }) => {
              return login(state, payload);
         case AUTH_CHECK:
             return checkAuth(state);
+        case AUTH_SET_USER : return setUser(state, payload);
         // case AUTH_LOGOUT:
         //     return logout(state);
         // case AUTH_RESET_PASSWORD:
@@ -44,6 +48,8 @@ const login =  (state, payload) => {
 
   state = Object.assign({}, state, { isAuthenticated: true });
 
+  store.dispatch(services.authService.setUser());
+
   return state;
 }
 
@@ -54,12 +60,15 @@ function checkAuth(state) {
 
     if (state.isAuthenticated) {
         HTTP.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('access_token')}`;
+        store.dispatch(services.authService.setUser());
     }
 
     return state;
 }
 
-
-export const getAuth = state => state.auth.isAuthenticated;
+export const setUser = (state, payload) => {
+    state = Object.assign({}, state, { user  : payload })
+    return state;
+};
 
 export default reducer;

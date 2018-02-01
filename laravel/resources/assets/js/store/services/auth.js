@@ -1,6 +1,7 @@
 import Http from "../../utils/Http";
 import { authActions } from "../actions";
 import Transformer from "../../utils/Transformer";
+import { HttpErrorReject } from './../../utils/HelperFunc';
 
 
 export const register = (cred) => {
@@ -11,17 +12,30 @@ export const register = (cred) => {
             dispatch(authActions.authLogin(data.accessToken));
             return resolve();
           })
-          .catch(err => {
-            const statusCode = err.response.status;
-            const data = { error: null, statusCode };
+          .catch(err => { return HttpErrorReject(err,reject); });
+    });
+};
 
-            if (statusCode === 422) {
-              const resetErrors = { errors: err.response.data, replace: false, searchStr: "", replaceStr: "" };
-              data.error = Transformer.resetValidationFields(resetErrors);
-            } else if (statusCode === 401) {
-              data.error = err.response.data.message;
-            }
-            return reject(data);
-          });
+export const login = (cred) => {
+    return dispatch => new Promise((resolve, reject) => {
+        Http.post("/api/auth/login", cred)
+          .then(res => {
+            const data = Transformer.fetch(res.data);
+            dispatch(authActions.authLogin(data.accessToken));
+            return resolve();
+          })
+          .catch(err => { return HttpErrorReject(err,reject); });
+    });
+};
+
+export const setUser = () => {
+    return dispatch => new Promise((resolve, reject) => {
+        Http.get("/api/user")
+          .then(res => {
+            const data = Transformer.fetch(res.data);
+            dispatch(authActions.setUser(data));
+            return resolve();
+          })
+          .catch(err => { return HttpErrorReject(err,reject); });
     });
 }

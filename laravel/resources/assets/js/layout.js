@@ -7,7 +7,8 @@ import { connect } from "react-redux";
 class Layout extends React.Component {
 
     static propTypes = {
-        children: PropTypes.node.isRequired
+        children: PropTypes.node.isRequired,
+        isAuthenticated : PropTypes.bool
     }
 
     constructor(props) {
@@ -34,10 +35,12 @@ class Layout extends React.Component {
                   </Link>
                 </div>
                 <div id="navbar" className="collapse navbar-collapse">
-                  <ul className="nav navbar-nav">
+                <ul className="nav navbar-nav">
                     <li className="active">
                       <Link to="/">Home</Link>
                     </li>
+                </ul>
+                  <ul className="nav navbar-nav navbar-right">
                     {this.props.isAuthenticated == false && <li><Link to="/login">Login</Link></li>}
                     {this.props.isAuthenticated == false && <li><Link to="/register">Register</Link></li>}
                     {this.props.isAuthenticated == true && <li><Link to="/logout">Logout</Link></li>}

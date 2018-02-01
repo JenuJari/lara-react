@@ -7,10 +7,12 @@ import { Redirect } from "react-router-dom";
 
 class Page extends Component {
   static displayName = "RegisterPage";
+
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
   };
+  
   constructor() {
     super();
 
@@ -30,7 +32,7 @@ class Page extends Component {
   render() {
 
     if (this.props.isAuthenticated) {
-      return <Redirect to="/" />;
+      return <Redirect to="/dashbord" />;
     }
 
     return (
