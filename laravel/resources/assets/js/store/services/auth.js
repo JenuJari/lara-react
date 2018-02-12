@@ -39,3 +39,16 @@ export const setUser = () => {
           .catch(err => { return HttpErrorReject(err,reject); });
     });
 }
+
+
+export const logout = () => {
+    return dispatch => {
+      return Http.delete('/api/auth/logout')
+        .then(() => {
+          dispatch(authActions.authLogout())
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }

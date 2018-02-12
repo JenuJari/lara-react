@@ -22,3 +22,13 @@ Route::post('auth/login', 'Auth\LoginController@login')->name('auth.login');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::group(['middleware' => 'auth:api'], function() {
+
+    //Route::patch('/users/{id}', 'UserController@update')->name('users.update');
+
+    //Route::resource('articles', 'ArticleController', ['except' => ['edit', 'create']]);
+
+    Route::delete('auth/logout', 'Auth\LoginController@logout')->name('auth.logout');;
+});

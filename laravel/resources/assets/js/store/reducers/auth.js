@@ -4,19 +4,19 @@ import * as services from  './../services';
 import {
     AUTH_CHECK,
     AUTH_LOGIN,
-    AUTH_SET_USER
-    // AUTH_LOGOUT,
+    AUTH_SET_USER,
+    AUTH_LOGOUT,
     // AUTH_REFRESH_TOKEN,
     // AUTH_RESET_PASSWORD,
 } from '../action-types';
 
-// const user = {
-//     id: null,
-//     name: null,
-//     email: null,
-//     createdAt: null,
-//     updatedAt: null,
-// }
+const user = {
+    id: null,
+    name: null,
+    email: null,
+    createdAt: null,
+    updatedAt: null,
+}
 
 const initialState = {
     isAuthenticated: false,
@@ -32,8 +32,8 @@ const reducer = (state = initialState, { type, payload = null }) => {
         case AUTH_CHECK:
             return checkAuth(state);
         case AUTH_SET_USER : return setUser(state, payload);
-        // case AUTH_LOGOUT:
-        //     return logout(state);
+        case AUTH_LOGOUT:
+            return logout(state);
         // case AUTH_RESET_PASSWORD:
         //     return resetPassword(state);
         default:
@@ -41,6 +41,17 @@ const reducer = (state = initialState, { type, payload = null }) => {
     }
 };
 
+
+function logout(state) {
+    localStorage.removeItem('access_token')
+    
+    state = Object.assign({}, state, {
+      isAuthenticated: false,
+      user,
+    });
+    
+    return state;
+}
 
 const login =  (state, payload) => {
   localStorage.setItem("access_token", payload);
